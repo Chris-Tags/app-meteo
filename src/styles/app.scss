@@ -1,0 +1,162 @@
+@use "./variables.scss" as *;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: $dark;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: $space-s $space-m;
+  gap: $space-m;
+}
+
+.formContainer,
+body > div {
+  width: 100%;
+  max-width: 48rem;
+}
+
+.formContainer {
+  display: flex;
+  align-items: stretch;
+  gap: $space-s;
+
+  input {
+    border: none;
+    padding: $space-m;
+    font-size: 1rem;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: $space-m;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    border-radius: $radius-m;
+    flex: 0 0 auto;
+    color: $light;
+    background-color: $red;
+
+    &:hover {
+      background-color: $red-hover;
+    }
+  }
+}
+
+.cityTitle {
+  text-align: center;
+
+  h1 {
+    color: $light;
+  }
+
+  h2 {
+    color: $red;
+  }
+
+  .meteo {
+    margin-top: $space-m;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: $space-m;
+    padding: $space-m;
+    background-color: $light;
+    border-radius: $radius-xl;
+
+    h2 {
+      color: $dark;
+    }
+
+    .temp {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  iframe {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border: 0;
+  }
+}
+
+.loader {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 0.1875rem solid;
+  border-color: #fff #fff transparent;
+  animation: rotation 1s linear infinite;
+  margin-top: $space-m;
+}
+
+.loader::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border: 0.1875rem solid;
+  border-color: transparent crimson crimson;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+
+@media (max-width: 48rem), (max-height: 30rem) {
+  .formContainer {
+    flex-direction: column;
+
+    input,
+    button {
+      width: 100%;
+    }
+  }
+
+  .cityTitle .meteo {
+    flex-direction: column;
+    border-radius: $radius-l;
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
